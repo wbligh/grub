@@ -57,13 +57,18 @@ def recipe_list(url):
     return steps_clean
         
         
-def printer(url):
-    for i in ingredient_list(url):
-        print(i)
-    print('\n')
-    for i in recipe_list(url):
-        print(i)
-        
-        
-        
+
+def recipe_name(url):
+    return ' '.join(url.split('recipes/',1)[1].split('-'))
+
+
+def compile_recipe(url):
+    return {'recipe_name':recipe_name(url), 'instructions':recipe_list(url), 'ingredients':ingredient_list(url)}
+
+
+
+
+
+
+
 
