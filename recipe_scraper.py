@@ -30,28 +30,27 @@ headers.update({  # add another one to the default set we just created
 })  # this makes the site thing we're on ubuntu running firefox
 
 
-
+def parse(url):
+    results = requests.get(url, headers=headers)
+    return BeautifulSoup(results.text, "html.parser")
 
 def ingredient_list(url):
-    results = requests.get(url, headers=headers)
-
-    soup = BeautifulSoup(results.text, "html.parser")
-
+    soup = parse(url)
     div=[]
-
     for EachPart in soup.select('section[class*="ingredients"]'):
         div.append(EachPart.find('ul')) #.find_all('li'))
         items = div[0].find_all('li')
         ingredients = [item.text for item in items]
     return ingredients
 
-
+def cooking_time(url):
+    soup = parse(url)
+    time_div = soup.select('div[class*="cook-and-prep-time"]')
+    times = time_div[0].find_all('li')
+    return [time.text for time in times]
 
 def recipe_list(url):
-    results = requests.get(url, headers=headers)
-
-    soup = BeautifulSoup(results.text, "html.parser")
-
+    soup = parse(url)
     for EachPart in soup.select('section[class*="method"]'):
         steps = EachPart.find_all('li')
         steps_clean = [steps[i].find('p').text for i in range(len(steps))]
@@ -64,7 +63,8 @@ def recipe_name(url):
 
 
 def compile_recipe(url):
-    return {'name':recipe_name(url), 'instructions':recipe_list(url), 'ingredients':ingredient_list(url)}
+    return {'name':recipe_name(url), 'instructions':recipe_list(url), \
+            'ingredients':ingredient_list(url), 'times':cooking_time(url)}
 
 
 
