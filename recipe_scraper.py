@@ -18,6 +18,9 @@ from bs4 import BeautifulSoup
 
 url = "https://www.bbcgoodfood.com/recipes/oregano-chicken-squash-traybake"
 url_2 = 'https://www.bbcgoodfood.com/recipes/sweet-potatoes-red-pepper-halloumi'
+url_3 = 'https://www.bbcgoodfood.com/recipes/pepper-steak-with-noodles'
+url_4 = 'https://www.bbcgoodfood.com/recipes/pasta-alla-norma'
+url_5 = 'https://www.bbcgoodfood.com/recipes/pork-fennel-burgers-fennel-slaw'
 
 
 
@@ -42,6 +45,25 @@ def ingredient_list(url):
     return ingredients
 
 
-ingredients = ingredient_list(url_2)
 
-print([ingredient for ingredient in ingredients])
+def recipe_list(url):
+    results = requests.get(url, headers=headers)
+
+    soup = BeautifulSoup(results.text, "html.parser")
+
+    for EachPart in soup.select('section[class*="method"]'):
+        steps = EachPart.find_all('li')
+        steps_clean = [steps[i].find('p').text for i in range(len(steps))]
+    return steps_clean
+        
+        
+def printer(url):
+    for i in ingredient_list(url):
+        print(i)
+    print('\n')
+    for i in recipe_list(url):
+        print(i)
+        
+        
+        
+
