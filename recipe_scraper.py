@@ -31,6 +31,7 @@ headers.update({  # add another one to the default set we just created
 
 
 
+
 def ingredient_list(url):
     results = requests.get(url, headers=headers)
 
@@ -63,7 +64,7 @@ def recipe_name(url):
 
 
 def compile_recipe(url):
-    return {'recipe_name':recipe_name(url), 'instructions':recipe_list(url), 'ingredients':ingredient_list(url)}
+    return {'name':recipe_name(url), 'instructions':recipe_list(url), 'ingredients':ingredient_list(url)}
 
 
 
