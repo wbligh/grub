@@ -47,7 +47,7 @@ def cooking_time(url):
     soup = parse(url)
     time_div = soup.select('div[class*="cook-and-prep-time"]')
     times = time_div[0].find_all('li')
-    return [time.text for time in times]
+    return [[time.text for time in times][0], ' '.join([time.text for time in times][1:])]
 
 def recipe_list(url):
     soup = parse(url)
@@ -63,13 +63,8 @@ def recipe_name(url):
 
 
 def compile_recipe(url):
-    return {'name':recipe_name(url), 'instructions':recipe_list(url), \
+    return {'url':url, 'name':recipe_name(url), 'instructions':recipe_list(url), \
             'ingredients':ingredient_list(url), 'times':cooking_time(url)}
-
-
-
-
-
 
 
 
