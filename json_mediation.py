@@ -14,13 +14,13 @@ from pymongo import MongoClient
 
 
 
-client = MongoClient("mongodb+srv://dbUser_WB:A8KWLm-Ad_fPC-J@cluster0.xb4rm.mongodb.net/db_grub_recipe?retryWrites=true&w=majority", tls = True)
+client = MongoClient("mongodb+srv://dbUser_WB:A8KWLm-Ad_fPC-J@cluster0.xb4rm.mongodb.net/db_grub_recipe?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE", connect = False)
 db = client.test
 
 
 
 
-'''
+
 
 url = "https://www.bbcgoodfood.com/recipes/oregano-chicken-squash-traybake"
 url_2 = 'https://www.bbcgoodfood.com/recipes/sweet-potatoes-red-pepper-halloumi'
@@ -39,4 +39,3 @@ records.find({'url': recipe['url']})
 
 records.insert_one(recipe)
 
-'''
