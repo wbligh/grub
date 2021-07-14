@@ -6,18 +6,16 @@
 
 '''
 
+
 import pandas
 import recipe_scraper as sc
 import json
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://dbUser_WB:A8KWLm-Ad_fPC-J@cluster0.xb4rm.mongodb.net/db_grub_recipe?retryWrites=true&w=majority',tls=True)
 
 
-client.list_database_names()
-
-
-
+client = MongoClient("mongodb+srv://dbUser_WB:A8KWLm-Ad_fPC-J@cluster0.xb4rm.mongodb.net/db_grub_recipe?retryWrites=true&w=majority", tls = True)
+db = client.test
 
 
 
