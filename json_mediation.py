@@ -18,14 +18,18 @@ client = MongoClient("mongodb+srv://dbUser_WB:A8KWLm-Ad_fPC-J@cluster0.xb4rm.mon
 
 counter = 1
 
-while counter < 2000:
+while counter < 4000:
     print('Iteration: ' + str(counter))
     db = client.get_database('db_grub_recipe')
     print('Database Refreshed')
     scraped_links = [d['url'] for d in list(db.cl_GF_recipes.find({},{'_id':False,'url':True}))]
     url = db.cl_GF_recipe_links.find_one({'recipe_url':{'$nin':scraped_links}},{'_id':False, 'recipe_url':True})['recipe_url']
     # Retrieve URL and initialise recipe object
-    recipe = sc.compile_recipe(url)
+    try:
+        recipe = sc.compile_recipe(url)
+    except:
+        db.cl_GF_recipes.insert_one({'url':url, 'Status':'Failed'})
+        continue
     print(recipe['name'] + ' recipe compiled')
     db.cl_GF_recipes.insert_one(recipe)
     print('Inserted JSON into recipe db')
@@ -35,5 +39,5 @@ while counter < 2000:
 
 
 
-
+1
 
