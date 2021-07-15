@@ -1,0 +1,34 @@
+
+
+
+
+'''
+
+BBC Goodfood Directory Scraper
+
+- Hit the recipe query webpage
+
+- Compile URLs and store in JSON collection via Pymongo
+
+
+
+'''
+
+
+
+import pandas
+import recipe_scraper as sc
+import json
+import requests
+from bs4 import BeautifulSoup
+from pymongo import MongoClient
+
+
+
+client = MongoClient("mongodb+srv://dbUser_WB:A8KWLm-Ad_fPC-J@cluster0.xb4rm.mongodb.net/db_grub_recipe?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE", connect = False)
+db = client.test
+
+
+bbc_gf_string = 'https://www.bbcgoodfood.com/search/recipes?q='
+
+

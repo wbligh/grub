@@ -28,14 +28,16 @@ url_3 = 'https://www.bbcgoodfood.com/recipes/pepper-steak-with-noodles'
 url_4 = 'https://www.bbcgoodfood.com/recipes/pasta-alla-norma'
 url_5 = 'https://www.bbcgoodfood.com/recipes/pork-fennel-burgers-fennel-slaw'
 
-
+# Retrieve URL and initialise recipe object
 recipe = sc.compile_recipe(url)
+
 
 db = client.get_database('db_grub_recipe')
 
 records = db.cl_GF_recipes
 
-records.find({'url': recipe['url']})
+#   records.insert_one(recipe)
 
-records.insert_one(recipe)
+result = records.find_one({'url': recipe['url']})
+
 

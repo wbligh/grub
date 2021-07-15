@@ -23,16 +23,13 @@ url_4 = 'https://www.bbcgoodfood.com/recipes/pasta-alla-norma'
 url_5 = 'https://www.bbcgoodfood.com/recipes/pork-fennel-burgers-fennel-slaw'
 
 
-'''
-headers = requests.utils.default_headers()  # a bunch of default headers
 
-headers.update({  # add another one to the default set we just created
-    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',  # firefox v52 useragent
-})  # this makes the site thing we're on ubuntu running firefox
-'''
 
-def parse(url):
-    results = requests.get(url) #, headers=headers)
+
+def parse(url): 
+    headers = requests.utils.default_headers()  # a bunch of default headers
+    headers.update({'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'})  # this makes the site thing we're on ubuntu running firefox
+    results = requests.get(url , headers=headers)
     return BeautifulSoup(results.text, "html.parser")
 
 def ingredient_list(url):
