@@ -76,13 +76,3 @@ while True:
 
 
 
-# https://www.bbcgoodfood.com/recipes/beef-bourguignon
-
-
-
-'''
-db = client.test
-'''
-
-
-
